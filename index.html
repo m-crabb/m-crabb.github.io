@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitchell Crabb</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0e27;
+            color: #00ff41;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .crt::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .terminal-header {
+            border: 2px solid #00ff41;
+            padding: 0.5rem 1rem;
+            margin-bottom: 2rem;
+            background: rgba(0, 255, 65, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .terminal-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff41;
+        }
+        
+        .terminal-title {
+            margin-left: auto;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        header {
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 10px #00ff41;
+            margin-bottom: 0.5rem;
+            animation: flicker 3s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.95; }
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #ff006e;
+            text-shadow: 0 0 5px #ff006e;
+            margin-bottom: 2rem;
+        }
+        
+        nav {
+            margin-bottom: 3rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 1rem;
+        }
+        
+        nav button {
+            background: none;
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        nav button:hover {
+            background: #00ff41;
+            color: #0a0e27;
+            box-shadow: 0 0 20px #00ff41;
+        }
+        
+        nav button.active {
+            background: #00ff41;
+            color: #0a0e27;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .content-box {
+            border: 2px solid #00ff41;
+            padding: 2rem;
+            background: rgba(0, 255, 65, 0.03);
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ff006e;
+            text-shadow: 0 0 5px #ff006e;
+        }
+        
+        p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .links a {
+            color: #00d9ff;
+            text-decoration: none;
+            border-bottom: 1px solid #00d9ff;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px #00d9ff;
+        }
+        
+        .links a:hover {
+            text-shadow: 0 0 10px #00d9ff;
+            border-bottom: 2px solid #00d9ff;
+        }
+        
+        .project-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px dashed #00ff41;
+        }
+        
+        .project-item:last-child {
+            border-bottom: none;
+        }
+        
+        .project-item h3 {
+            color: #ff006e;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .prompt {
+            color: #00d9ff;
+            margin-right: 0.5rem;
+        }
+        
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #00ff41;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                gap: 1rem;
+            }
+            
+            nav button {
+                font-size: 0.9rem;
+                padding: 0.4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="crt"></div>
+    <div class="container">
+        <div class="terminal-header">
+            <div class="terminal-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="terminal-title">mcrabb@imperial:~</div>
+        </div>
+
+        <header>
+            <h1>MITCHELL_CRABB</h1>
+            <p class="tagline">&gt; AI researcher // ex-quant // builder</p>
+        </header>
+
+        <nav>
+            <button class="active" onclick="showSection('about')">[ ABOUT ]</button>
+            <button onclick="showSection('work')">[ WORK ]</button>
+            <button onclick="showSection('projects')">[ PROJECTS ]</button>
+            <button onclick="showSection('contact')">[ CONTACT ]</button>
+        </nav>
+
+        <div id="about" class="section active">
+            <div class="content-box">
+                <h2>$ whoami</h2>
+                <p>
+                    <span class="prompt">&gt;</span>MSc AI student at Imperial College London researching uncertainty quantification in large language models.
+                </p>
+                <p>
+                    <span class="prompt">&gt;</span>Previously spent 5 years in quantitative finance building risk models, margin optimisation tools, and derivatives pricing systems at Barclays, OpenGamma, and Morgan Stanley.
+                </p>
+                <p>
+                    <span class="prompt">&gt;</span>Interested in the intersection of ML reliability, quantitative finance, and building robust systems that know when they don't know.
+                </p>
+                <p>
+                    <span class="prompt">&gt;</span>When not coding: cycling, triathlons, and contemplating whether uncertainty is a feature or a bug.
+                </p>
+            </div>
+        </div>
+
+        <div id="work" class="section">
+            <div class="content-box">
+                <h2>$ cat experience.txt</h2>
+                
+                <div class="project-item">
+                    <h3>→ Barclays Investment Bank</h3>
+                    <p><span class="prompt">role:</span> Cross-Product Risk & Margin Optimisation</p>
+                    <p><span class="prompt">date:</span> Jun 2024 – Aug 2025</p>
+                    <p>Built PCA frameworks for interest rate portfolios and Python optimisation tools for client risk profiles across multiple CCPs.</p>
+                </div>
+
+                <div class="project-item">
+                    <h3>→ OpenGamma</h3>
+                    <p><span class="prompt">role:</span> Product Development</p>
+                    <p><span class="prompt">date:</span> Jul 2022 – Jun 2024</p>
+                    <p>Fine-tuned margin forecasting models to 98% accuracy. Developed risk-factor models for CCP margin methodologies.</p>
+                </div>
+
+                <div class="project-item">
+                    <h3>→ Morgan Stanley</h3>
+                    <p><span class="prompt">role:</span> Counterparty Risk</p>
+                    <p><span class="prompt">date:</span> Jul 2020 – Jun 2022</p>
+                    <p>Managed market risk for prime brokerage and derivatives clearing. Built risk frameworks for systematic credit clients.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="projects" class="section">
+            <div class="content-box">
+                <h2>$ ls projects/</h2>
+                
+                <div class="project-item">
+                    <h3>→ Uncertainty Quantification in LLMs</h3>
+                    <p><span class="prompt">status:</span> IN_PROGRESS</p>
+                    <p>Research project at Imperial College London investigating token-level confidence scoring in open-source language models. Building an interactive Python interface for real-time uncertainty-aware inference.</p>
+                </div>
+
+                <div class="project-item">
+                    <h3>→ [Your other projects here]</h3>
+                    <p><span class="prompt">status:</span> COMING_SOON</p>
+                    <p>More projects to be added...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <div class="content-box">
+                <h2>$ cat contact.info</h2>
+                <p>
+                    <span class="prompt">&gt;</span>Want to chat about ML, quant finance, or uncertainty quantification?
+                </p>
+                <div class="links">
+                    <a href="mailto:mitchcrabb2121@gmail.com">EMAIL</a>
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank">LINKEDIN</a>
+                    <a href="https://github.com/yourusername" target="_blank">GITHUB</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>[ © 2026 MITCHELL CRABB // BUILT WITH &lt;TERMINAL&gt; AESTHETICS ]</p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('nav button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

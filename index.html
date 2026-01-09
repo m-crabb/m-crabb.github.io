@@ -3,322 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mitchell Crabb - Research Engineer & Quant. MSc AI at Imperial College London, formerly Barclays & Morgan Stanley.">
+    <meta property="og:title" content="Mitchell Crabb | Research Engineer">
+    <meta property="og:description" content="From margin models to language models. Portfolio and research.">
+    <meta property="og:type" content="website">
+    
     <title>Mitchell Crabb</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --sidebar-width: 280px;
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --heading-color: #111111;
+            --link-color: #2c7bb6;
+            --border-color: #eeeeee;
+            --tag-bg: #f4f6f8;
+            --tag-text: #455a64;
+            
+            --font-serif: 'Merriweather', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Courier New', Courier, monospace;
-            background: #0a0e27;
-            color: #e0e0e0;
-            padding: 0;
+            font-family: var(--font-sans);
+            color: var(--text-color);
+            background: var(--bg-color);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* LAYOUT */
+        .wrapper {
+            display: flex;
             min-height: 100vh;
-            line-height: 1.6;
         }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-        
-        .terminal-header {
-            border: 1px solid #333;
-            background: #1a1e3bc4;
-            padding: 0.5rem 1rem;
-            margin-bottom: 2rem;
-            border-radius: 6px 6px 0 0;
+
+        /* SIDEBAR */
+        aside {
+            width: var(--sidebar-width);
+            background: #fafafa;
+            border-right: 1px solid var(--border-color);
+            padding: 4rem 2.5rem;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
             display: flex;
-            align-items: center;
-            border-bottom: 1px solid #00ff41;
+            flex-direction: column;
+            z-index: 100;
         }
-        
-        .terminal-dots {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        
-        .red { background: #ff5f56; }
-        .yellow { background: #ffbd2e; }
-        .green { background: #27c93f; }
-        
-        .terminal-title {
-            margin-left: auto;
-            font-size: 0.9rem;
-            color: #00ff41;
-            font-weight: bold;
-        }
-        
-        header {
-            margin-bottom: 3rem;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            color: #00ff41;
+
+        aside h1 {
+            font-family: var(--font-serif);
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: var(--heading-color);
+            line-height: 1.2;
             margin-bottom: 0.5rem;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
         }
-        
+
         .tagline {
-            font-size: 1.2rem;
-            color: #00d9ff;
-            margin-bottom: 2rem;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            line-height: 1.4;
         }
-        
-        nav {
-            margin-bottom: 3rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            border-bottom: 1px solid #333;
-            padding-bottom: 1rem;
+
+        nav ul {
+            list-style: none;
         }
-        
-        nav button {
-            background: none;
-            border: 1px solid #00ff41;
-            color: #00ff41;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-            padding: 0.5rem 1.2rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
+
+        nav li {
+            margin-bottom: 0.8rem;
         }
-        
-        nav button:hover {
-            background: rgba(0, 255, 65, 0.1);
-        }
-        
-        nav button.active {
-            background: #00ff41;
-            color: #0a0e27;
-            font-weight: bold;
-        }
-        
-        .section {
-            display: none;
-            animation: fadeIn 0.3s ease-in;
-        }
-        
-        .section.active {
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.2s;
             display: block;
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        nav a:hover {
+            color: var(--link-color);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-footer a {
+            display: block;
+            color: #888;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.2s;
         }
         
-        .content-box {
-            border-left: 2px solid #333;
-            padding-left: 2rem;
-            margin-bottom: 2rem;
+        .sidebar-footer a:hover {
+            color: var(--link-color);
         }
-        
+
+        /* MAIN CONTENT */
+        main {
+            margin-left: var(--sidebar-width);
+            padding: 5rem 6rem;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 2rem; 
+        }
+
         h2 {
+            font-family: var(--font-serif);
+            font-weight: 700;
             font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: #ff006e;
-            font-weight: normal;
+            color: var(--heading-color);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            letter-spacing: -0.5px;
         }
-        
+
         h3 {
-            color: #00ff41;
-            font-size: 1.2rem;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: #000;
+            margin-top: 0;
             margin-bottom: 0.2rem;
         }
-        
-        .subtitle {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-        
-        p {
-            margin-bottom: 1rem;
-            color: #ccc;
-        }
-        
-        .prompt {
-            color: #00ff41;
-            margin-right: 0.5rem;
-            font-weight: bold;
-        }
-        
-        .comment {
-            color: #6a737d;
-            font-style: italic;
-        }
-        
-        .item-block {
+
+        .entry {
             margin-bottom: 2.5rem;
         }
-        
-        .item-block-compact {
-            margin-bottom: 1.5rem;
+
+        .subtitle {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            display: block;
         }
-        
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            color: #444;
+        }
+
+        /* Skills Box */
+        .skills-box {
+            margin-top: 2.5rem;
+            background: #fafafa;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skills-box h4 {
+            font-family: var(--font-serif);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            color: #222;
+        }
+
         .tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 0.5rem;
         }
         
         .tag {
-            font-size: 0.8rem;
-            border: 1px solid #333;
-            padding: 0.2rem 0.6rem;
-            color: #00d9ff;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 4px 10px;
             border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+            border: 1px solid #e1e4e8;
         }
-        
-        .links {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .links a {
-            color: #00d9ff;
+
+        /* Links */
+        a.text-link {
+            color: var(--link-color);
             text-decoration: none;
             border-bottom: 1px solid transparent;
-            transition: border 0.3s;
         }
-        
-        .links a:hover {
-            border-bottom: 1px solid #00d9ff;
+        a.text-link:hover {
+            border-bottom-color: var(--link-color);
         }
-        
-        footer {
-            margin-top: 4rem;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #555;
-            border-top: 1px solid #333;
-            padding-top: 2rem;
-        }
-        
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .container { padding: 1.5rem; }
-            nav button { 
-                width: 100%; 
-                text-align: center;
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 900px) {
+            .wrapper {
+                flex-direction: column;
+            }
+
+            aside {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 3rem 2rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            main {
+                margin-left: 0;
+                padding: 3rem 2rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .sidebar-footer {
+                display: flex;
+                gap: 1.5rem;
+                margin-top: 2rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="terminal-header">
-            <div class="terminal-dots">
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
+    <div class="wrapper">
+        <aside>
+            <div class="profile-header">
+                <h1>Mitchell Crabb</h1>
+                <p class="tagline">From margin models to language models.</p>
             </div>
-            <div class="terminal-title">mcrabb@imperial:~</div>
-        </div>
 
-        <header>
-            <h1>MITCHELL CRABB</h1>
-            <p class="tagline">&gt; from margin models to language models</p>
-        </header>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#work">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                </ul>
+            </nav>
 
-        <nav>
-            <button class="active" onclick="showSection('about')">[ ABOUT ]</button>
-            <button onclick="showSection('work')">[ WORK ]</button>
-            <button onclick="showSection('projects')">[ PROJECTS ]</button>
-            <button onclick="showSection('contact')">[ CONTACT ]</button>
-        </nav>
+            <div class="sidebar-footer">
+                <a href="mailto:mitchcrabb2121@gmail.com">Email</a>
+                <a href="https://linkedin.com/in/m-crabb" target="_blank">LinkedIn</a>
+                <a href="https://github.com/m-crabb" target="_blank">GitHub</a>
+            </div>
+        </aside>
 
-        <div id="about" class="section active">
-            <div class="content-box">
-                <h2>$ whoami</h2>
+        <main>
+            
+            <section id="about">
+                <h2>About</h2>
                 <p>
-                    <span class="prompt">&gt;</span>MSc Artificial Intelligence student at Imperial College London researching uncertainty quantification in large language models.
+                    I am a mathematician applying my geometric intuition to problems in artificial intelligence. After graduating with a First Class degree in Mathematical Sciences, I spent five years in the City of London engineering risk and treasury solutions at Morgan Stanley, OpenGamma, and Barclays.
                 </p>
                 <p>
-                    <span class="prompt">&gt;</span>Previously spent 5 years in quantitative finance building risk models, margin optimisation tools, and quantitative analytics solutions at Barclays, OpenGamma, and Morgan Stanley.
+                    Seeking to align my professional experience with the mathematical demands of advanced research, I returned to academia. My interests focus on the foundations of machine learning, with specific interests in Differential Privacy, Federated Learning, Model Plasticity, and Uncertainty Quantification. I'm particularly keen on understanding how to apply these concepts to real-world environments.
                 </p>
-
-                <br>
-                <h2>$ cat skills.txt</h2>
-                <p class="comment"># Core Technical Stack</p>
-                <div class="tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">PyTorch</span>
-                    <span class="tag">NumPy</span>
-                    <span class="tag">pandas</span>
-                    <span class="tag">scikit-learn</span>
-                    <span class="tag">Hugging Face</span>
-                    <span class="tag">Git</span>
-                    <span class="tag">LaTeX</span>
-                    <span class="tag">MATLAB</span>
-                </div>
-            </div>
-        </div>
-
-        <div id="work" class="section">
-            <div class="content-box">
-                <h2>$ cat experience.log</h2>
+                <p>
+                    Outside of work, I apply the same endurance to my personal life as a keen cyclist and triathlete, having recently completed an Ironman 70.3 in Germany.
+                </p>
                 
-                <div class="item-block-compact">
+                <div class="skills-box">
+                    <h4>Core Technical Stack</h4>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">NumPy</span>
+                        <span class="tag">pandas</span>
+                        <span class="tag">scikit-learn</span>
+                        <span class="tag">Hugging Face</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">LaTeX</span>
+                        <span class="tag">MATLAB</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="work">
+                <h2>Experience</h2>
+
+                <div class="entry">
                     <h3>Barclays Investment Bank</h3>
                     <span class="subtitle">Cross-Product Risk & Margin Optimisation | 2024 – 2025</span>
                 </div>
 
-                <div class="item-block-compact">
+                <div class="entry">
                     <h3>OpenGamma</h3>
                     <span class="subtitle">Product Development | 2022 – 2024</span>
                 </div>
 
-                <div class="item-block-compact">
+                <div class="entry">
                     <h3>Morgan Stanley</h3>
                     <span class="subtitle">Counterparty Risk | 2020 – 2022</span>
                 </div>
 
-                <div class="item-block-compact">
+                <div class="entry">
                     <h3>Morgan Stanley</h3>
                     <span class="subtitle">Sales and Trading Industrial Placement | 2018 – 2019</span>
                 </div>
+            </section>
 
-                <br>
-                <h2>$ cat education.json</h2>
+            <section id="education">
+                <h2>Education</h2>
                 
-                <div class="item-block-compact">
+                <div class="entry">
                     <h3>Imperial College London</h3>
                     <span class="subtitle">MSc Artificial Intelligence | 2025 – 2026</span>
                 </div>
 
-                <div class="item-block-compact">
+                <div class="entry">
                     <h3>University of Bath</h3>
                     <span class="subtitle">BSc Mathematical Sciences with Industrial Placement, First Class (83%) | 2016 – 2020</span>
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <div id="projects" class="section">
-            <div class="content-box">
-                <h2>$ ls -la ./projects</h2>
+            <section id="projects">
+                <h2>Projects</h2>
                 
-                <div class="item-block">
+                <div class="entry">
                     <h3>uncertainty-quantification-llm</h3>
-                    <span class="subtitle">Research @ Imperial | Python, PyTorch, Hugging Face</span>
-                    <p>Investigating token-level confidence scoring in open-source language models. Building an interactive interface for real-time uncertainty-aware inference.</p>
+                    <span class="subtitle">Group Research Project @ Imperial | Python, PyTorch, Hugging Face</span>
+                    <p>
+                        Investigating token-level confidence scoring in open-source language models. Building an interactive interface for real-time uncertainty-aware inference.
+                    </p>
                     <div class="tags">
                         <span class="tag">LLMs</span>
                         <span class="tag">Research</span>
@@ -326,49 +360,14 @@
                     </div>
                 </div>
 
-                <div class="item-block">
-                    <p class="comment"># More projects coming soon - check GitHub for latest commits</p>
+                <div class="entry" style="margin-top: 3rem; border-top: 1px dashed #eee; padding-top: 1rem;">
+                    <p style="font-style: italic; color: #888; font-size: 0.95rem;">
+                        More projects coming soon - check <a href="https://github.com/m-crabb" target="_blank" class="text-link">GitHub</a> for latest commits.
+                    </p>
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <div id="contact" class="section">
-            <div class="content-box">
-                <h2>$ echo $CONTACT_INFO</h2>
-                <p>
-                    <span class="prompt">&gt;</span>Open to discussing applied AI, ML, quantitative finance, or research collaboration.
-                </p>
-                <div class="links">
-                    <a href="mailto:mitchcrabb2121@gmail.com">EMAIL</a>
-                    <a href="https://linkedin.com/in/m-crabb" target="_blank">LINKEDIN</a>
-                    <a href="https://github.com/m-crabb" target="_blank">GITHUB</a>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <p>&copy; 2026 Mitchell Crabb</p>
-        </footer>
+        </main>
     </div>
 
-    <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Remove active from all buttons
-            document.querySelectorAll('nav button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Add active to clicked button
-            event.target.classList.add('active');
-        }
-    </script>
 </body>
-</html>

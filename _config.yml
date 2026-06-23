@@ -1,0 +1,22 @@
+title: Mitchell Crabb
+# One-line summary shown in italic beneath the name. Swap this for your own.
+summary: Essays and ideas.
+author: Mitchell Crabb
+# Used for absolute URLs in feeds etc. Update if the domain changes.
+url: "https://m-crabb.github.io"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  footnote_backlink: "↩"
+permalink: /:year/:month/:title/
+
+# Date display format, e.g. "23 June 2026"
+date_format: "%-d %B %Y"
+
+exclude:
+  - README.md
+  - docs/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/

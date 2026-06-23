@@ -1,0 +1,23 @@
+---
+layout: default
+---
+{%- assign words = content | number_of_words -%}
+{%- assign reading_time = words | divided_by: 220 | plus: 1 -%}
+<article class="essay">
+  <header class="essay__header">
+    <h1 class="essay__title">{{ page.title }}</h1>
+    <div class="essay__meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: site.date_format }}</time>
+      <span class="essay__dot" aria-hidden="true">·</span>
+      <span>{{ reading_time }} min read</span>
+    </div>
+  </header>
+
+  <div class="essay__body">
+    {{ content }}
+  </div>
+
+  <nav class="essay__back">
+    <a href="{{ '/' | relative_url }}">← All essays</a>
+  </nav>
+</article>

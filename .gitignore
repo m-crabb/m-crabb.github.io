@@ -1,0 +1,14 @@
+# Local working docs — not for publishing
+docs/
+
+# macOS
+.DS_Store
+
+# Jekyll build output (when building locally)
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Locally-installed gems for previewing (GitHub Pages builds on its own)
+vendor/
+Gemfile.lock

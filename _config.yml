@@ -1,7 +1,9 @@
 title: Mitchell Crabb
-# One-line summary shown in italic beneath the name. Swap this for your own.
+# One-line summary shown in italic beneath the name.
 summary: Essays and ideas.
 author: Mitchell Crabb
+# LinkedIn handle, shown in the footer.
+linkedin: m-crabb
 # Used for absolute URLs in feeds etc. Update if the domain changes.
 url: "https://m-crabb.github.io"
 

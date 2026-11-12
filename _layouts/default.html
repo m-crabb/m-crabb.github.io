@@ -47,6 +47,10 @@
 
   <footer class="site-footer">
     <span>© {{ site.title }}</span>
+    {%- if site.linkedin %}
+    <span class="site-footer__sep" aria-hidden="true">·</span>
+    <a href="https://www.linkedin.com/in/{{ site.linkedin }}/" rel="me noopener">LinkedIn</a>
+    {%- endif %}
   </footer>
 
   <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>

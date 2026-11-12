@@ -370,6 +370,9 @@ main,
   letter-spacing: 0.14em;
   color: var(--margin);
 }
+.site-footer a { color: var(--margin); text-decoration: none; }
+.site-footer a:hover { color: var(--accent-strong); }
+.site-footer__sep { margin-inline: 0.6em; }
 
 /* ============================================================
    Focus

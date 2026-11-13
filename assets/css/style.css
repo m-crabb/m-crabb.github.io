@@ -36,7 +36,10 @@
 
 /* ---- Reset-ish ---- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;  /* reserve scrollbar space so short pages don't shift sideways */
+}
 body {
   margin: 0;
   background: var(--paper);
@@ -384,14 +387,12 @@ main,
 }
 
 /* ============================================================
-   Motion — masthead fade-up on load
+   Motion — cross-fade between pages (supporting browsers only;
+   others just navigate normally). The masthead is identical on
+   every page, so it stays put while the content changes.
    ============================================================ */
 @media (prefers-reduced-motion: no-preference) {
-  .masthead { animation: rise 600ms ease both; }
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: none; }
-  }
+  @view-transition { navigation: auto; }
 }
 
 /* ============================================================

@@ -5,4 +5,4 @@ dek: "Work in progress."
 date: 2026-11-12
 ---
 
-Coming soon; rough idea here is to leverage an "autoresearch" style harness over [my thesis]({% post_url 2026-11-10-kawasaki-inspired-neural-sampler %}) and see if any interesting discoveries are made.
+Coming soon; rough idea here is to leverage an [*AI Scientist*](https://github.com/SakanaAI/AI-Scientist) style harness over [my thesis]({% post_url 2026-11-10-kawasaki-inspired-neural-sampler %}) and see if any interesting discoveries are made.

@@ -13,7 +13,7 @@ Agentic AI systems have proliferated over the last couple of years, and as capab
 
 The widely accepted standard set-up in AI control is the untrusted-trusted regime - take a model we understand well and consider to be trustworthy, and use it to monitor the untrustworthy model. The former reviews each action of the latter, and assigns an integer suspicion score, and actions that exceed a pre-defined threshold will be escalated to expert human review.[^control] Deployed monitoring systems hence follow a similar pattern, where the trusted model is often one that's sufficiently lightweight that it doesn't massively affect inference time (or cost), but is capable enough that it doesn't escalate too many false positives. The latter is not only expensive but in short supply, if you consider the amount of throughput.
 
-A slightly more refined approach discussed by Anthropic in their constitutional classifier posts,[^cc] and by Apollo when discussing their monitoring system Watcher,[^watcher] is to use a *cascade*. Instead of using one monitor, use two (or more) in a heirarchical structure, where traffic first hits the weak monitor, and is escalated up the chain subject to some decision rule. Ensemble monitoring is another interesting and robust approach, though less likely to be used in practical deployments given the additive cost.[^ensembles]
+A slightly more refined approach discussed by Anthropic in their constitutional classifier posts,[^cc] and by Apollo when discussing their monitoring system Watcher,[^watcher] is to use a *cascade*. Instead of using one monitor, use two (or more) in a heirarchical structure, where traffic first hits the weak monitor, and is escalated up the chain subject to some decision rule. We can then set a budget on the percentage of activity we send to the stronger monitor, effectively reducing cost by its inverse. Ensemble monitoring is another interesting and robust approach, though less likely to be used in practical deployments given the additive cost.[^ensembles]
 
 So, a cascade sounds good; most of the time our monitoring is cheap and fast, and we get the benefits of a stronger monitor when the occassion demands it. The issue is that weak monitors are often poorly calibrated[^calibration] and likely need supplemental information to ensure it's trustworthy. Why should we take its output at face value, without considering its uncertainty? We know we're able to recover a plethora of uncertainty signals from both the model internals[^internals] and its output,[^outputs] can we leverage these to make better monitoring decisions? While this is where we began, what followed was a journey down a winding path of monitoring cascade design choices, as many of the technical details of how these work in practice are not publicly available.[^practice]
 
@@ -25,13 +25,16 @@ We wanted to use open-weight monitors as it affords us a wider range of uncertai
 
 There aren't quite as many as uncertainty metrics as there are models to choose from, but that's not to say they aren't plentiful...
 
-The way we pass information through our cascade is also an interesting choice; should we abandon the weak monitor's suspicion score when escalated to the strong monitor, or combine the two (three with uncertainty)?[^combining]...
+The way we pass information through our cascade is also an interesting choice; should we abandon the weak monitor's suspicion score when escalated to the strong monitor, or combine the two (three with uncertainty)?[^combining]. We opted to go with the latter, taking the view that having more evidence is likely not a bad thing.
 
 Escalation prompt...
 
 ## Findings
 
 ## Limitations and Future Work
+
+Saturation of monitors, and different families with different behaviours/scoring tendencies.
+Models are not specifically trained with monitoring in mind...
 
 ## Acknowledgements
 

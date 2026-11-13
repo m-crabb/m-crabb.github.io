@@ -23,13 +23,13 @@ So, a cascade sounds good; most of the time our monitoring is cheap and fast, an
 
 To begin with, we need the agent we'll be monitoring, which for the purposes of this exercise we will assume we only have black-box access to (i.e. we can't access its weights, internals, etc.). Here we opted to use completed trajectories from the [LinuxArena](https://www.linuxarena.ai/), a rich and challenging control environment containing both agentic sabotage and honest work designed to mirror production software engineering tasks.[^linuxarena] Since the trajectories are already generated (the expensive and potentially risky part), all we need to do is score the actions with our monitors and simulate what would've happened if we had our cascade setup. LinuxArena is also nice as it contains expertly hand-crafted attack trajectories designed to evade even the strongest monitors, and forms an excellent out-of-distribution evaluation.
 
-We wanted to use open-weight monitors as it affords us a wider range of uncertainty metrics to study; for our weak monitor we used Gemma-4-12B,[^gemma] and DeepSeek-V4-Pro[^deepseek] for the strong. We opted to use monitors outside of the same family...
+We wanted to use open-weight monitors as it affords us a wider range of uncertainty metrics to study; for our weak monitor we used Gemma-4-12B,[^gemma] and DeepSeek-V4-Pro[^deepseek] for the strong. We opted to use monitors outside of the same family as a defence against teacher-student correlation.../LLM judge paper TODO.
 
-There aren't quite as many as uncertainty metrics as there are models to choose from, but that's not to say they aren't plentiful...
+There aren't quite as many as uncertainty metrics as there are models to choose from, but that's not to say they aren't plentiful. My initial view was using semantic entropy would be a nice approach, but given you need to generate many completions to sample from it would likely be too expensive to be useful in monitoring. You can however train semantic entropy probes, which we did and found to be highly correlated with simply asking the model how uncertain it was in its own response. For simplicity then, we pitched the latter against a probe trained to predict monitor error (i.e. when it raises an action which turns out to be honest).
 
 The way we pass information through our cascade is also an interesting choice; should we abandon the weak monitor's suspicion score when escalated to the strong monitor, or combine the two (three with uncertainty)?[^combining]. We opted to go with the latter, taking the view that having more evidence is likely not a bad thing.
 
-Escalation prompt...
+And finally, our escalation prompt. Should we tell the strong monitor the action has been raised for its review, or simply ask for its score? If we do tell it, what context should we add? We experimented with adding a discloure (TODO add below), as well as providing context of the entire trajectory (TODO also add below).
 
 ## Findings
 

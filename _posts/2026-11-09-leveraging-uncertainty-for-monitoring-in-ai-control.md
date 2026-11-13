@@ -38,6 +38,8 @@ Models are not specifically trained with monitoring in mind...
 
 ## Acknowledgements
 
+Special thanks go to Lindley Lentati for his thoughtful guidance and supervision throughout, as well as the Cambridge AI Safety Hub for organising the MARS programme and funding the research.
+
 [^control]: Greenblatt et al., [AI Control: Improving Safety Despite Intentional Subversion](https://arxiv.org/abs/2312.06942) (2024); Korbak et al., [A sketch of an AI control safety case](https://arxiv.org/abs/2501.17315) (2025).
 [^cc]: Sharma et al., [Constitutional Classifiers](https://arxiv.org/abs/2501.18837) (2025); Cunningham et al., [Constitutional Classifiers++](https://arxiv.org/abs/2601.04603) (2026); Anthropic, [Cost-Effective Constitutional Classifiers via Representation Re-use](https://alignment.anthropic.com/2025/cheap-monitors/) (2025).
 [^watcher]: Apollo Research, [Watcher: Technical Details for Teams](https://watcher.apolloresearch.ai/blog/monitor-coding-agents/) (2026).

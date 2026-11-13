@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Leveraging uncertainty for monitoring in AI control"
-dek: "Work in progress."
+dek: "Write-up in progress."
 date: 2026-11-09
 ---
 

@@ -38,6 +38,8 @@ And finally, our escalation prompt. Should we tell the strong monitor the action
 Saturation of monitors, and different families with different behaviours/scoring tendencies.
 Models are not specifically trained with monitoring in mind...
 
+Interesting items for future work include studying these cascade designs while under adversarial attack (either from the agent or another third party), as well as extending it to multi-agent monitoring and perhaps most exciting would be the study of predictive monitoring.
+
 ## Acknowledgements
 
 Special thanks go to Lindley Lentati for his thoughtful guidance and supervision throughout, as well as the Cambridge AI Safety Hub for organising the MARS programme and funding the research.

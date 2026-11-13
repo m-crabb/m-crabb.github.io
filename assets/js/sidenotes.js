@@ -3,7 +3,11 @@
    references it. Below the breakpoint, leave the normal footnote list in place.
    No JS / unsupported -> footnotes render at the foot of the essay as usual. */
 (function () {
-  var WIDE = window.matchMedia('(min-width: 1000px)');
+  // The essay column is centred, so sidenotes hang in the right-hand margin.
+  // Only build them when that margin can hold one: viewport >= measure (48rem)
+  // + 2 x (gap 2.75rem + sidenote 13rem) + 2 x page padding (1.5rem) = 82.5rem.
+  // Keep in step with --measure / --sidenote-* in style.css.
+  var WIDE = window.matchMedia('(min-width: 83rem)');
   var body = document.querySelector('.essay__body');
   if (!body) return;
 

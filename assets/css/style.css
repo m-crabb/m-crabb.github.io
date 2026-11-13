@@ -14,7 +14,7 @@
   --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  --measure: 36rem;          /* reading column */
+  --measure: 48rem;          /* reading column */
   --sidenote-w: 13rem;
   --sidenote-gap: 2.75rem;
   --page-pad: 1.5rem;
@@ -55,7 +55,7 @@ body {
 main,
 .site-footer {
   width: 100%;
-  max-width: calc(var(--measure) + var(--sidenote-gap) + var(--sidenote-w));
+  max-width: calc(var(--measure) + 2 * var(--page-pad));  /* one centred column */
   margin-inline: auto;
   padding-inline: var(--page-pad);
 }
@@ -146,7 +146,7 @@ main,
 
 .entry {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--sidenote-w);
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--sidenote-gap);
   padding: 1.6rem 0;
   border-bottom: 1px solid var(--rule);
@@ -404,7 +404,7 @@ main,
   }
   .entry__margin { display: none; }
   .entry__date { display: block; margin-top: 0.5rem; }
-  /* sidenotes are not generated below 1000px; .footnotes shows instead */
+  /* sidenotes need room in the right-hand margin; see sidenotes.js */
 }
 
 @media (max-width: 540px) {
